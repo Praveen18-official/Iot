@@ -1,14 +1,14 @@
 import Navigation from "@/components/Navigation";
 import { Card } from "@/components/ui/card";
 import { Cpu, Database, Wifi, Bell, LineChart, Cloud } from "lucide-react";
-import iotImage from "@/assets/iot-system.jpg";
+import iotImage from "/Leaves-768x510.jpg";
 
 const About = () => {
   const systemFeatures = [
     {
       icon: Cpu,
-      title: "IoT Sensors",
-      description: "Advanced environmental and plant health sensors for continuous monitoring",
+      title: "ESP32 Camera Module",
+      description: "High-resolution camera module for real-time plant health monitoring and disease detection",
     },
     {
       icon: Database,
@@ -41,7 +41,7 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <div className="pt-24 pb-20">
+      <div className="pt-24 pb-4">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-16">
@@ -120,13 +120,13 @@ const About = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2">Sensor Network</h3>
+                  <h3 className="font-semibold text-foreground mb-2">ESP32 CAM Module</h3>
                   <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li>Temperature sensors (±0.5°C accuracy)</li>
-                    <li>Humidity sensors (±3% RH accuracy)</li>
-                    <li>Soil moisture sensors</li>
-                    <li>Light intensity sensors</li>
-                    <li>Image capture for visual analysis</li>
+                    <li>OV2640 camera sensor with 2MP resolution</li>
+                    <li>Wi-Fi connectivity for wireless image transmission</li>
+                    <li>Low-power consumption for extended battery life</li>
+                    <li>Real-time image capture for disease analysis</li>
+                    <li>MicroSD card slot for local storage backup</li>
                   </ul>
                 </div>
                 <div>
@@ -164,14 +164,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © 2025 AgroMonitor. All rights reserved. IoT-Based Disease Monitoring System.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };

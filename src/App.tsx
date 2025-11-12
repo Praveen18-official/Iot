@@ -6,12 +6,26 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Detection from "./pages/Detection";
-import Dashboard from "./pages/Dashboard";
+import Monitoring from "./pages/Monitoring";
 import Auth from "./pages/Auth";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
+// Simple auth check component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/auth';
+    }
+  }, []);
+
+  const token = localStorage.getItem('token');
+  return token ? <>{children}</> : null;
+};
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -22,8 +36,13 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/detection" element={<Detection />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/monitoring" element={
+            <ProtectedRoute>
+              <Monitoring />
+            </ProtectedRoute>
+          } />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -31,5 +50,4 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-
 export default App;

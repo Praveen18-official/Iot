@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Leaf, Menu, X } from "lucide-react";
+import { Leaf, Menu, X, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 const Navigation = () => {
@@ -11,7 +11,8 @@ const Navigation = () => {
     { name: "Home", path: "/" },
     { name: "About System", path: "/about" },
     { name: "Disease Detection", path: "/detection" },
-    { name: "Monitoring", path: "/dashboard" },
+    { name: "Monitoring", path: "/monitoring" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;

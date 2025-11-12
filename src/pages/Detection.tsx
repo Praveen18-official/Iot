@@ -4,6 +4,7 @@ import { AlertTriangle, Eye, Microscope, TrendingUp } from "lucide-react";
 import diseaseImage from "@/assets/disease-detection.jpg";
 
 const Detection = () => {
+
   const symptoms = [
     "Dark brown circular spots on leaves",
     "Concentric ring patterns (target-like appearance)",
@@ -15,18 +16,18 @@ const Detection = () => {
   const detectionMethods = [
     {
       icon: Eye,
-      title: "Visual Monitoring",
-      description: "AI-powered image analysis for early spot detection on leaves and stems",
+      title: "Visual Inspection",
+      description: "Manual inspection for early spot detection on leaves and stems using trained observation techniques",
     },
     {
       icon: Microscope,
-      title: "Environmental Correlation",
-      description: "Monitoring conditions favorable for disease development (humidity, temperature)",
+      title: "Environmental Monitoring",
+      description: "Track conditions favorable for disease development (humidity, temperature, airflow patterns)",
     },
     {
       icon: TrendingUp,
-      title: "Predictive Analytics",
-      description: "Machine learning models predict disease outbreak probability",
+      title: "Growth Pattern Analysis",
+      description: "Monitor plant growth patterns and development stages to predict potential disease risks",
     },
   ];
 
@@ -137,17 +138,16 @@ const Detection = () => {
             </div>
           </div>
 
-          {/* Preventive Measures */}
           <div>
             <h2 className="text-3xl font-bold text-foreground text-center mb-12">
               Preventive Measures & Management
             </h2>
             <Card className="p-8 bg-gradient-to-br from-card to-card/50">
               <p className="text-lg text-muted-foreground mb-6">
-                Our system not only detects the disease but also provides real-time
-                recommendations for prevention and management:
+                Our comprehensive approach combines manual inspection with advanced monitoring
+                systems to provide early detection and prevention strategies:
               </p>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {preventiveMeasures.map((measure, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="mt-1.5 p-1 rounded-full bg-accent/10">
@@ -162,14 +162,6 @@ const Detection = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-8 mt-20">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © 2025 AgroMonitor. All rights reserved. IoT-Based Disease Monitoring System.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -10,18 +10,6 @@ import { toast } from "sonner";
 import heroImage from "@/assets/hero-farming.jpg";
 
 const Index = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Message sent successfully! We'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
   const features = [
     {
       icon: Activity,
@@ -65,7 +53,7 @@ const Index = () => {
               <div className="flex flex-wrap gap-4">
                 <Link to="/auth">
                   <Button size="lg" className="shadow-[var(--shadow-glow)]">
-                    Get Started
+                    Sign Up and Start
                   </Button>
                 </Link>
                 <Link to="/about">
@@ -123,7 +111,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h2 className="text-4xl font-bold text-foreground">
-              About Our System
+              About System
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Our IoT-Based Alternaria Solani Monitoring System is specifically designed
@@ -142,107 +130,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Contact Us</h2>
-              <p className="text-xl text-muted-foreground">
-                Get in touch with our team for more information
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <Card className="p-6 bg-gradient-to-br from-card to-card/50">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Mail className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                      <p className="text-muted-foreground">contact@agromonitor.com</p>
-                    </div>
-                  </div>
-                </Card>
-                <Card className="p-6 bg-gradient-to-br from-card to-card/50">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Phone className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                      <p className="text-muted-foreground">+91 (123) 456-7890</p>
-                    </div>
-                  </div>
-                </Card>
-                <Card className="p-6 bg-gradient-to-br from-card to-card/50">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <MapPin className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Address</h3>
-                      <p className="text-muted-foreground">
-                        Agricultural Research Center, India
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-              <Card className="p-6 bg-gradient-to-br from-card to-card/50">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Input
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder="Your Message"
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      rows={5}
-                      required
-                    />
-                  </div>
-                  <Button type="submit" className="w-full">
-                    Send Message
-                  </Button>
-                </form>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © 2025 AgroMonitor. All rights reserved. IoT-Based Disease Monitoring
-            System.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -18,35 +18,88 @@ const Auth = () => {
     confirmPassword: "",
   });
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder login logic
-    if (loginData.email && loginData.password) {
+    
+    if (!loginData.email || !loginData.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: loginData.email,
+          password: loginData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Save token to localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
       toast.success("Login successful! Redirecting to dashboard...");
       setTimeout(() => navigate("/dashboard"), 1500);
-    } else {
-      toast.error("Please fill in all fields");
+    } catch (error: any) {
+      console.error('Login error:', error);
+      toast.error(error.message || 'Failed to login. Please try again.');
     }
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder signup logic
-    if (
-      signupData.name &&
-      signupData.email &&
-      signupData.password &&
-      signupData.confirmPassword
-    ) {
-      if (signupData.password !== signupData.confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
-      }
-      toast.success("Account created successfully! Please login.");
-      // Reset form and switch to login tab
-      setSignupData({ name: "", email: "", password: "", confirmPassword: "" });
-    } else {
+    
+    if (!signupData.name || !signupData.email || !signupData.password || !signupData.confirmPassword) {
       toast.error("Please fill in all fields");
+      return;
+    }
+
+    if (signupData.password !== signupData.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: signupData.name,
+          email: signupData.email,
+          password: signupData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      // Reset form
+      setSignupData({ name: "", email: "", password: "", confirmPassword: "" });
+      
+      // Show success message and switch to login tab
+      toast.success("Account created successfully! Please login.");
+      
+      // You can also automatically switch to the login tab here if using tabs
+      // setActiveTab('login');
+      
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      toast.error(error.message || 'Failed to create account. Please try again.');
     }
   };
 
@@ -187,14 +240,6 @@ const Auth = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © 2025 AgroMonitor. All rights reserved. IoT-Based Disease Monitoring System.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };
